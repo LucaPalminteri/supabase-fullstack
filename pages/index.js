@@ -9,6 +9,8 @@ export default function Home() {
   const [ideas,setIdeas] = useState([])
   const [idea,setIdea] = useState({title: '', description: ""})
   const {title, description} = idea
+  const [biggestId,setBiggestId] = useState([])
+
 
   useEffect(()=>{
     fetchIdeas()
@@ -23,7 +25,13 @@ export default function Home() {
     const {data} = await supabase.from('Ideas').insert([{title, description}]).single()
     setIdea({title:"",description: ""})
   }
-  console.log(ideas);
+
+  const inputHandle = (e,i)=> {
+    if ( i == 1 ) setIdea(prev => ({...prev, title:e}))
+    else if (i == 2) setIdea(prev => ({...prev, description:e}))
+  }
+
+  
 
   return (
     <div className={styles.container}>
@@ -34,8 +42,16 @@ export default function Home() {
       </Head>
 
       <h2>Insert</h2>
-      <input></input>
-      <input></input>
+      <label>Title</label>
+      <input
+        onChange={ (e,i)=> inputHandle(e.target.value,1)}
+      />
+      <label>Description</label>
+      <input
+        onChange={ (e,i)=> inputHandle(e.target.value,2)}
+      />
+      <button
+      onClick={createIdea}>Submit Idea</button>
     </div>
   )
 }
