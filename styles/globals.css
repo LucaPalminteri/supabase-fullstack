@@ -16,6 +16,29 @@ h1 {
   padding: 15px 30px;
   background-color: #FFEBAD;
   border-radius: 50px;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  background-color: #FFEBAD;
+  top: 18px;
+  left: -50px;
+}
+
+h1::before {
+  content: '';
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  background-color: #FFEBAD;
+  top: 18px;
+  right: -50px;
 }
 
 h4 {
@@ -26,7 +49,7 @@ h4 {
 }
 
 h6 {
-  font-weight: 100;
+  font-weight: 200;
 }
 
 .container {
