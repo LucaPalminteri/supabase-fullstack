@@ -72,7 +72,9 @@ export default function Home() {
 
       {/* <Popup/> */}
 
+    <div className='title'>
       <h1>IDEAS</h1>
+    </div>
       <h4>Upload your best ideas to the world</h4>
     <div className='container'>
       <h2></h2>

@@ -6,8 +6,23 @@ body {
   background-color: #C3F8FF;
 }
 
-h1,h4 {
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
   text-align: center;
+  padding: 15px 30px;
+  background-color: #FFEBAD;
+  border-radius: 50px;
+}
+
+h4 {
+  margin-top: 0;
+  padding-bottom: 20px;
+  text-align: center;
+  font-weight: 100;
 }
 
 .container {
