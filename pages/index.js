@@ -12,6 +12,7 @@ export default function Home() {
   const [idea,setIdea] = useState({title: '', description: ""})
   const {title, description} = idea
   const [isUpdate,setIsUpdate] = useState(false)
+  const [idUpdate,setIdUpdate] = useState(0)
   
 
   useEffect(()=>{
@@ -38,21 +39,23 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsUpdate(true)
     setIdea({title: ideas[index].title, description: ideas[index].description})
-    
+    setIdUpdate(id)
   }
 
-  console.log(ideas[0]);
-
-  async function updateIdea(id,index) {
-    const {data} = await supabase.from('Ideas').update({title,description}).match({id})
+  async function updateIdea(id) {
+    id = idUpdate
+    const {data} = await supabase.from('Ideas').update({title: idea.title,description: idea.description}).match({id})
     setIdea({title:"",description: ""})
     setIsUpdate(false)
+    window.location.reload();
   }
 
   const inputHandle = (e,i)=> {
     if ( i == 1 ) setIdea(prev => ({...prev, title:e}))
     else if (i == 2) setIdea(prev => ({...prev, description:e}))
   }
+
+  console.log(idea);
 
   return (
     <div>
