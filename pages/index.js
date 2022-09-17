@@ -11,12 +11,12 @@ export default function Home() {
   const [ideas,setIdeas] = useState([])
   const [idea,setIdea] = useState({title: '', description: ""})
   const {title, description} = idea
-  const [reload,setReload] = useState(false)
+  const [isUpdate,setIsUpdate] = useState(false)
   
 
   useEffect(()=>{
     fetchIdeas()
-  },[reload])
+  },[])
 
   async function fetchIdeas() {
     const {data} = await supabase.from('Ideas').select()
@@ -24,16 +24,30 @@ export default function Home() {
   }
 
   async function createIdea() {
-    setReload(prev => !prev)
     const {data} = await supabase.from('Ideas').insert([{title, description}],{ upsert: false }).single()
     setIdea({title:"",description: ""})
+    window.location.reload();
   }
 
   async function deleteIdea(id) {
-    setReload(prev => !prev)
-    console.log(id);
     const {data} = await supabase.from('Ideas').delete().match({id});
+    window.location.reload();
   } 
+
+  const midUpdateIdea = (id,index) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsUpdate(true)
+    setIdea({title: ideas[index].title, description: ideas[index].description})
+    
+  }
+
+  console.log(ideas[0]);
+
+  async function updateIdea(id,index) {
+    const {data} = await supabase.from('Ideas').update({title,description}).match({id})
+    setIdea({title:"",description: ""})
+    setIsUpdate(false)
+  }
 
   const inputHandle = (e,i)=> {
     if ( i == 1 ) setIdea(prev => ({...prev, title:e}))
@@ -62,15 +76,24 @@ export default function Home() {
         value={idea.description}
         onChange={ (e,i)=> inputHandle(e.target.value,2)}
       />
-      <button
-      className='btn-create'
-        onClick={createIdea}>CREATE</button>
+      {
+        isUpdate ? 
+        <button
+          className='btn-create'
+          onClick={updateIdea}>UPDATE</button>
+        :
+          <button
+            className='btn-create'
+            onClick={createIdea}>CREATE</button>
+      }
+      
+        
     </div>
     <div className='item-container'>
       {
         ideas.length == 0 ?
         <div className="spinner"></div> :
-        ideas.map(idea => (
+        ideas.map((idea,index) => (
           <div className='item' key={idea.id}>
             <h4>{idea.title}</h4>
             <h6>{idea.description}</h6>
@@ -78,9 +101,10 @@ export default function Home() {
               className='btn-delete'
               onClick={() => deleteIdea(idea.id)}
               >x
-                
-              {/* <DeleteIcon /> */}
               </button>
+            <button
+              className='btn-update'
+              onClick={ () => midUpdateIdea(idea.id,index)}>e</button>
           </div>)
         )
       }
