@@ -1,0 +1,28 @@
+.popup {
+    border: 1px solid black;
+    top: 30%;
+    bottom: 30%;
+    left: 25px;
+    right: 25px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    position: absolute;
+}
+
+.btn-container button {
+    margin: 10px;
+    border-radius: 30px;
+    border: none;
+    padding: 10px 15px;
+    font-weight: 700;
+}
+
+.btn-container button:nth-child(2) {
+    background-color: #FF6461;
+}
+
