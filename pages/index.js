@@ -4,6 +4,8 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {supabase} from '../utils/ideas';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Document from './_document';
 
 
 export default function Home() {
@@ -55,8 +57,6 @@ export default function Home() {
     else if (i == 2) setIdea(prev => ({...prev, description:e}))
   }
 
-  console.log(idea);
-
   return (
     <div>
       <Head>
@@ -103,11 +103,13 @@ export default function Home() {
             <button 
               className='btn-delete'
               onClick={() => deleteIdea(idea.id)}
-              >x
+              ><DeleteIcon />
               </button>
             <button
               className='btn-update'
-              onClick={ () => midUpdateIdea(idea.id,index)}>e</button>
+              onClick={ () => midUpdateIdea(idea.id,index)}>
+                <EditIcon />
+              </button>
           </div>)
         )
       }

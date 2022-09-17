@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: sans-serif;
   background-color: #C3F8FF;
 }
 
@@ -37,6 +36,7 @@ input,textarea {
 textarea {
   height: 80px;
   border-radius: 10px;
+  max-width: 75%;
 }
 
 input:focus, textarea:focus {
@@ -104,9 +104,8 @@ button {
 
 .btn-update {
   right: 25px;
-  background-color: #FFEBAD;
-  outline: 2px solid #EFDB9D;
-  color: #000;
+  background-color: #ABD9FF;
+  outline: 2px solid #8BA9DF;
 }
 
 
