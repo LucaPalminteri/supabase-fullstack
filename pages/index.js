@@ -112,7 +112,7 @@ export default function Home() {
         <div className="spinner"></div> :
         ideas.map((idea,index) => (
           <div className='item' key={idea.id}>
-            <h4>{idea.title}</h4>
+            <h3>{idea.title}</h3>
             <h6>{idea.description}</h6>
             <button 
               className='btn-delete'
