@@ -82,7 +82,6 @@ export default function Home() {
   }
 
   const handleContact = () => {
-    console.log("sdgerg");
     setIsShowContact(prev => !prev)
   }
 
@@ -99,12 +98,12 @@ export default function Home() {
           isShowContact ? 
           <>
             <div onClick={handleContact}>
-              <KeyboardArrowUpIcon fontSize='large'/>            
+              <KeyboardArrowUpIcon style={{cursor:'pointer'}} fontSize='large'/>            
             </div>
             <Contact />
           </>
           :
-            <KeyboardArrowDownIcon onClick={handleContact} fontSize='large'/>
+            <KeyboardArrowDownIcon style={{cursor:'pointer'}} onClick={handleContact} fontSize='large'/>
 
         }
       </div>
