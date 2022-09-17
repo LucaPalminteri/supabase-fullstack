@@ -31,12 +31,17 @@ export default function Home() {
   }
 
   async function createIdea() {
+    if (validInput(idea) == false){
+      alert('The title or description must be different than an empty string') 
+      return;
+    } 
     const {data} = await supabase.from('Ideas').insert([{title, description}],{ upsert: false }).single()
     setIdea({title:"",description: ""})
     window.location.reload();
   }
 
   async function deleteIdea(id) {
+    if(confirm('Do you really want to delete this idea?') == false) return;
     const {data} = await supabase.from('Ideas').delete().match({id});
     window.location.reload();
   } 
@@ -49,6 +54,11 @@ export default function Home() {
   }
 
   async function updateIdea(id) {
+    if (validInput(idea) == false){
+      alert('The title or description must be different than an empty string') 
+      return;
+    } 
+      
     id = idUpdate
     const {data} = await supabase.from('Ideas').update({title: idea.title,description: idea.description}).match({id})
     setIdea({title:"",description: ""})
@@ -59,6 +69,11 @@ export default function Home() {
   const inputHandle = (e,i)=> {
     if ( i == 1 ) setIdea(prev => ({...prev, title:e}))
     else if (i == 2) setIdea(prev => ({...prev, description:e}))
+  }
+
+  const validInput = (pIdea) => {
+    if(pIdea.title == "" || pIdea.description == "") return false
+    return true
   }
 
   const cancelUpdate = ()=> {
