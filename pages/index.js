@@ -27,6 +27,10 @@ export default function Home() {
     setIdea({title:"",description: ""})
   }
 
+  async function deleteIdea(id) {
+    const {data} = await supabase.from('Ideas').delete().match(id);
+  } 
+
   const inputHandle = (e,i)=> {
     if ( i == 1 ) setIdea(prev => ({...prev, title:e}))
     else if (i == 2) setIdea(prev => ({...prev, description:e}))
@@ -43,24 +47,24 @@ export default function Home() {
       <h1>IDEAS</h1>
       <h4>Upload your best ideas to the world</h4>
     <div className='container'>
-      <h2>INSERT</h2>
+      <h2></h2>
       <input
         placeholder='Title'
         value={idea.title}
         onChange={ (e,i)=> inputHandle(e.target.value,1)}
       />
-      <input
+      <textarea
         placeholder='Description'
         value={idea.description}
         onChange={ (e,i)=> inputHandle(e.target.value,2)}
       />
       <button
-        onClick={createIdea}>Create Idea</button>
+        onClick={createIdea}>CREATE</button>
     </div>
     <div className='item-container'>
       {
         ideas.length == 0 ?
-        <div class="spinner"></div> :
+        <div className="spinner"></div> :
         ideas.map(idea => (
           <div className='item' key={idea.id}>
             <h4>{idea.title}</h4>
