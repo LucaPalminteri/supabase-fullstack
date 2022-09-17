@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {supabase} from '../utils/ideas';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 export default function Home() {
   
@@ -28,7 +30,9 @@ export default function Home() {
   }
 
   async function deleteIdea(id) {
-    const {data} = await supabase.from('Ideas').delete().match(id);
+    setReload(prev => !prev)
+    console.log(id);
+    const {data} = await supabase.from('Ideas').delete().match({id});
   } 
 
   const inputHandle = (e,i)=> {
@@ -59,6 +63,7 @@ export default function Home() {
         onChange={ (e,i)=> inputHandle(e.target.value,2)}
       />
       <button
+      className='btn-create'
         onClick={createIdea}>CREATE</button>
     </div>
     <div className='item-container'>
@@ -69,6 +74,13 @@ export default function Home() {
           <div className='item' key={idea.id}>
             <h4>{idea.title}</h4>
             <h6>{idea.description}</h6>
+            <button 
+              className='btn-delete'
+              onClick={() => deleteIdea(idea.id)}
+              >x
+                
+              {/* <DeleteIcon /> */}
+              </button>
           </div>)
         )
       }
