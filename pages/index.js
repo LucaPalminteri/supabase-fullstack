@@ -67,6 +67,7 @@ export default function Home() {
   }
 
   const handleContact = () => {
+    console.log("sdgerg");
     setIsShowContact(prev => !prev)
   }
 
@@ -78,15 +79,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
  
-      <div className='drop-menu' onClick={handleContact}>
+      <div className='drop-menu' >
         {
           isShowContact ? 
-          <div className='contact-container'>
-          <KeyboardArrowUpIcon fontSize='large'/> 
-          <Contact />
-          </div>
+          <>
+            <div onClick={handleContact}>
+              <KeyboardArrowUpIcon fontSize='large'/>            
+            </div>
+            <Contact />
+          </>
           :
-          <KeyboardArrowDownIcon fontSize='large'/>
+            <KeyboardArrowDownIcon onClick={handleContact} fontSize='large'/>
 
         }
       </div>

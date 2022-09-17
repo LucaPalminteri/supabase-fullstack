@@ -191,15 +191,12 @@ button {
   position: absolute;
 }
 
-.contact-container {
-  display: flex;
-  align-items: center;
-}
-
 .contact {
   position: absolute;
-  width: 100vw;
-  margin: 0;
+  top: 0;
+  left: 0;
+  width: 80vw;
+  margin-left: 35px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -207,6 +204,11 @@ button {
 
 .contact a {
   color: #000;
+}
+
+.contact h3 {
+  padding: 0;
+  margin: 10px;
 }
 
 
