@@ -92,6 +92,9 @@ export default function Home() {
         <meta name="description" content="A simple website where anyone can share their best ideas" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className='home'>
+
+      
  
       <div className='drop-menu' >
         {
@@ -107,9 +110,6 @@ export default function Home() {
 
         }
       </div>
-
-      {/* <Contact /> */}
-      {/* <Popup/> */}
 
     <div className='title'>
       <h1>IDEAS</h1>
@@ -142,6 +142,7 @@ export default function Home() {
             className='btn-create'
             onClick={createIdea}>CREATE</button>
       }
+      </div>
         
     </div>
     <div className='item-container'>
