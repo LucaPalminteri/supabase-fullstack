@@ -27,7 +27,7 @@ export default function Home() {
 
   async function fetchIdeas() {
     const {data} = await supabase.from('Ideas').select()
-    setIdeas(data)
+    setIdeas(data.reverse())
   }
 
   async function createIdea() {
@@ -83,7 +83,7 @@ export default function Home() {
 
   const handleContact = () => {
     setIsShowContact(prev => !prev)
-  }
+  }  
 
   return (
     <div>
@@ -142,7 +142,6 @@ export default function Home() {
             className='btn-create'
             onClick={createIdea}>CREATE</button>
       }
-      
         
     </div>
     <div className='item-container'>
@@ -163,6 +162,7 @@ export default function Home() {
               onClick={ () => midUpdateIdea(idea.id,index)}>
                 <EditIcon />
               </button>
+              <p>{index+1}</p>
           </div>)
         )
       }

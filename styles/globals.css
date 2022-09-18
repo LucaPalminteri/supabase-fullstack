@@ -129,6 +129,14 @@ button {
   width: 100%;
 }
 
+.item p {
+  position: absolute;
+  font-size: 14px;
+  bottom: -5px;
+  left: 10px;
+  font-weight: 100;
+}
+
 .btn-delete, .btn-update {
   background-color: #FF6461;
   border: none;
