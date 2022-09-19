@@ -10,6 +10,7 @@ import Popup from '../components/Popup';
 import Contact from '../components/Contact';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Login from '../components/Login';
 
 export default function Home() {
   
@@ -19,6 +20,8 @@ export default function Home() {
   const [isUpdate,setIsUpdate] = useState(false)
   const [idUpdate,setIdUpdate] = useState(0)
   const [isShowContact,setIsShowContact] = useState(false)
+  const [isLogged,setIsLogged] = useState(false)
+
   
 
   useEffect(()=>{
@@ -58,9 +61,10 @@ export default function Home() {
       alert('The title or description must be different than an empty string') 
       return;
     } 
-      
+
+    let date = new Date()
     id = idUpdate
-    const {data} = await supabase.from('Ideas').update({title: idea.title,description: idea.description,updated_at: new Date()}).match({id})
+    const {data} = await supabase.from('Ideas').update({title: idea.title,description: idea.description,updated_at: date}).match({id})
     setIdea({title:"",description: ""})
     setIsUpdate(false)
     window.location.reload();
@@ -84,7 +88,6 @@ export default function Home() {
   const handleContact = () => {
     setIsShowContact(prev => !prev)
   }  
-
   return (
     <div>
       <Head>
@@ -164,7 +167,10 @@ export default function Home() {
                 <EditIcon />
               </button>
               <p>{index+1}</p>
-              <span>{idea.created_at}</span>
+              {idea.updated_at == null ?
+                <span>{idea.created_at}</span> :
+                <span>{idea.updated_at}</span>
+              }
           </div>)
         )
       }

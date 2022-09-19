@@ -53,10 +53,6 @@ h6 {
   font-weight: 200;
 }
 
-.home {
-  height: 90vh;
-}
-
 .container {
   display: flex;
   flex-direction: column;
