@@ -21,11 +21,13 @@ export default function Home() {
   const [idUpdate,setIdUpdate] = useState(0)
   const [isShowContact,setIsShowContact] = useState(false)
   const [isLogged,setIsLogged] = useState(false)
+  const [authors,setAuthors] = useState([])
 
   
 
   useEffect(()=>{
     fetchIdeas()
+    getAuthor()
   },[])
 
   async function fetchIdeas() {
@@ -38,7 +40,8 @@ export default function Home() {
       alert('The title or description must be different than an empty string') 
       return;
     } 
-    const {data} = await supabase.from('Ideas').insert([{title, description,created_at: new Date()}],{ upsert: false }).single()
+    let date = new Date();
+    const {data} = await supabase.from('Ideas').insert([{title: idea.title, description: idea.description, author:1, created_at: date}],{ upsert: false })
     setIdea({title:"",description: ""})
     window.location.reload();
   }
@@ -85,9 +88,21 @@ export default function Home() {
     setIdea({title:"",description: ""})
   }
 
+  const getAuthor = async () => {
+    const {data} = await supabase.from('users').select('first_name')
+    const arrayAuthors = [];
+    data.map((author)=>{
+      if(author != undefined) arrayAuthors.push(author.first_name);
+    })
+    setAuthors(arrayAuthors)
+  }
+
   const handleContact = () => {
     setIsShowContact(prev => !prev)
-  }  
+  } 
+
+  console.log(authors);
+
   return (
     <div>
       <Head>
@@ -166,6 +181,7 @@ export default function Home() {
               onClick={ () => midUpdateIdea(idea.id,index)}>
                 <EditIcon />
               </button>
+              <p className='author'>{authors[idea.author-1]}</p>
               <p>{index+1}</p>
               {idea.updated_at == null ?
                 <span>{idea.created_at}</span> :

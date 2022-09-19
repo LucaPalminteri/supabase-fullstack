@@ -138,6 +138,10 @@ button {
   font-weight: 100;
 }
 
+.author {
+  top:0
+}
+
 .item span {
   position: absolute;
   font-size: 10px;
