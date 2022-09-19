@@ -35,7 +35,7 @@ export default function Home() {
       alert('The title or description must be different than an empty string') 
       return;
     } 
-    const {data} = await supabase.from('Ideas').insert([{title, description}],{ upsert: false }).single()
+    const {data} = await supabase.from('Ideas').insert([{title, description,created_at: new Date()}],{ upsert: false }).single()
     setIdea({title:"",description: ""})
     window.location.reload();
   }
@@ -60,7 +60,7 @@ export default function Home() {
     } 
       
     id = idUpdate
-    const {data} = await supabase.from('Ideas').update({title: idea.title,description: idea.description}).match({id})
+    const {data} = await supabase.from('Ideas').update({title: idea.title,description: idea.description,updated_at: new Date()}).match({id})
     setIdea({title:"",description: ""})
     setIsUpdate(false)
     window.location.reload();
@@ -164,6 +164,7 @@ export default function Home() {
                 <EditIcon />
               </button>
               <p>{index+1}</p>
+              <span>{idea.created_at}</span>
           </div>)
         )
       }
