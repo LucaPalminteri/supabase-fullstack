@@ -1,7 +1,7 @@
 import Document from "./_document";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { supabase } from "../utils/ideas";
+import { supabase } from "../utils/client";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Contact from "../components/Contact";
@@ -70,6 +70,9 @@ export default function Home() {
       alert("The title or description must be different than an empty string");
       return;
     }
+
+    
+
 
     let date = new Date();
     id = idUpdate;
